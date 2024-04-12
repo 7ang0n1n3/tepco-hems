@@ -145,4 +145,14 @@ class LowVoltageSmartElectricEnergyMeterClass : public HousingFacilitiesDeviceCl
         }
         return hasData;
     }
+
+    /// @brief 積算電力量計測値（正方向）取得
+    bool getCumulativeEnergyNegative(float *const cumulativeEnergyNegative) {
+        int32_t cumulativeEnergyNegativeInt = 0;
+        bool hasData                        = getSpecifiedPropertyData(Property::CumulativeEnergyNegative, &cumulativeEnergyNegativeInt);
+        if (hasData) {
+            *cumulativeEnergyNegative = cumulativeEnergyNegativeInt * this->syntheticTransformationRatio * this->cumulativeEnergyUnit;
+        }
+        return hasData;
+    }
 };
